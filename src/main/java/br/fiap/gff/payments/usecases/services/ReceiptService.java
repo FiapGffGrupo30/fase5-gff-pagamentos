@@ -1,5 +1,6 @@
 package br.fiap.gff.payments.usecases.services;
 
+import br.fiap.gff.payments.dto.PaymentSpecification;
 import br.fiap.gff.payments.dto.ReceiptRequest;
 import br.fiap.gff.payments.models.Receipt;
 import br.fiap.gff.payments.models.Status;
@@ -19,11 +20,15 @@ public class ReceiptService implements ReceiptUseCase {
     private final PaymentUseCase payment;
 
     @Override
-    public boolean create(ReceiptRequest request) {
+    public boolean create(ReceiptRequest request, PaymentSpecification paymentSpecification) {
+        // Verify idempontecy
+        if (repository.count("transactionId", request.transactionID()) > 0) {
+            return true; // Receipt already created
+        }
         // Create the receipt of transaction
         Receipt r = save(request);
         // Process the payment
-        boolean success = payment.process(r);
+        boolean success = payment.process(r, paymentSpecification);
         updateReceiptStatus(success, r);
         return success;
     }
