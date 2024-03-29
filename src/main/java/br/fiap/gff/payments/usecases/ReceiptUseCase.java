@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface ReceiptUseCase {
 
-    void create(ReceiptRequest event);
+    boolean create(ReceiptRequest request);
 
     Receipt getByTransactionId(UUID transactionId);
 
