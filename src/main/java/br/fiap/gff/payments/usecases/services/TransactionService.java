@@ -31,29 +31,29 @@ public class TransactionService implements TransactionUseCase {
 
     @Override
     public void execute(TransactionEvent event) {
-        TransactionProperties.Wallet wallet = verify(event.transactionId(), event.customerId());
+        TransactionProperties.PaymentMethod wallet = verify(event.transactionId(), event.customerId());
         PaymentSpecification paymentSpecification = getPaymentMethodFromWallet(wallet);
         ReceiptRequest receiptRequest = eventToReceiptRequest(event);
         boolean success = receipts.create(receiptRequest, paymentSpecification);
         notifyEvent(event, success);
     }
 
-    private static PaymentSpecification getPaymentMethodFromWallet(TransactionProperties.Wallet wallet) {
+    private static PaymentSpecification getPaymentMethodFromWallet(TransactionProperties.PaymentMethod method) {
         return PaymentSpecification.builder()
-                .paymentMethod(wallet.paymentMethod())
-                .cardNumber(wallet.cardNumber())
-                .cardName(wallet.cardName())
-                .expirationDate(wallet.expirationDate())
-                .securityCode(wallet.securityCode())
+                .paymentMethod(method.paymentMethod())
+                .cardNumber(method.cardNumber())
+                .cardName(method.cardName())
+                .expirationDate(method.expirationDate())
+                .securityCode(method.securityCode())
                 .build();
     }
 
 
-    private TransactionProperties.Wallet verify(UUID transactionId, Long customerId) {
+    private TransactionProperties.PaymentMethod verify(UUID transactionId, Long customerId) {
         TransactionProperties properties = redisCommand.get(transactionId.toString());
         if (properties == null || !properties.customerId().equals(customerId))
             throw new TransactionNotAllowedException(customerId, transactionId);
-        return properties.wallet();
+        return properties.paymentMethod();
     }
 
     private static ReceiptRequest eventToReceiptRequest(TransactionEvent event) {

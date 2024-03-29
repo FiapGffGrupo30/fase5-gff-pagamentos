@@ -10,6 +10,7 @@ import br.fiap.gff.payments.usecases.ReceiptUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -34,7 +35,7 @@ public class ReceiptService implements ReceiptUseCase {
     }
 
     @Override
-    public Receipt getByTransactionId(UUID transactionId) {
+    public Receipt getByTransactionId(String transactionId) {
         return repository.find("transactionId", transactionId).stream().findFirst().orElse(null);
     }
 
@@ -47,7 +48,7 @@ public class ReceiptService implements ReceiptUseCase {
         Receipt r = Receipt.builder()
                 .customerId(request.customerId())
                 .orderId(request.orderId())
-                .transactionId(request.transactionID())
+                .transactionId(request.transactionID().toString())
                 .total(request.total())
                 .status(Status.PENDING)
                 .build();
@@ -70,7 +71,10 @@ public class ReceiptService implements ReceiptUseCase {
     }
 
     private void setReceiptPaid(Receipt r) {
-        r = r.toBuilder().status(Status.PAID).build();
+        r = r.toBuilder()
+                .status(Status.PAID)
+                .paymentDate(LocalDate.now())
+                .build();
         repository.update(r);
     }
 

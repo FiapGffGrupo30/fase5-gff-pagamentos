@@ -28,7 +28,7 @@ public class ReceiptController {
 
     @GET
     @Path("/transaction/{transactionId}")
-    public Response getByTransactionId(@PathParam("transactionId") UUID transactionId) {
+    public Response getByTransactionId(@PathParam("transactionId") String transactionId) {
         Receipt r = receipts.getByTransactionId(transactionId);
         return Response.ok(r).build();
     }

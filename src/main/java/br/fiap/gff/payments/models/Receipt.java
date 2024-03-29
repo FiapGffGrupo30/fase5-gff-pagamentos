@@ -16,7 +16,7 @@ public class Receipt {
     private ObjectId id;
     private Long customerId;
     private Long orderId;
-    private UUID transactionId;
+    private String transactionId;
     private Double total;
     private Status status;
     private LocalDate paymentDate;

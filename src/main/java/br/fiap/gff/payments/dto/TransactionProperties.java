@@ -5,8 +5,8 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 
 @Builder
-public record TransactionProperties(Long customerId, Wallet wallet) {
-    public record Wallet(
+public record TransactionProperties(Long customerId, PaymentMethod paymentMethod) {
+    public record PaymentMethod(
             String paymentMethod,
             String cardNumber,
             String cardName,

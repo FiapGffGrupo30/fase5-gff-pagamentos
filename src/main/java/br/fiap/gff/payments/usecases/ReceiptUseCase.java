@@ -10,7 +10,7 @@ public interface ReceiptUseCase {
 
     boolean create(ReceiptRequest request, PaymentSpecification paymentSpecification);
 
-    Receipt getByTransactionId(UUID transactionId);
+    Receipt getByTransactionId(String transactionId);
 
     Receipt getById(String id);
 }
