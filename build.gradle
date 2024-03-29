@@ -21,7 +21,6 @@ dependencies {
     implementation 'io.quarkus:quarkus-resteasy-reactive'
     implementation 'io.quarkus:quarkus-arc'
     implementation 'org.projectlombok:lombok:1.18.32'
-    annotationProcessor 'io.quarkus:quarkus-panache-common'
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
     implementation "org.mapstruct:mapstruct:1.5.5.Final"

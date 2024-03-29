@@ -35,7 +35,7 @@ public class ReceiptService implements ReceiptUseCase {
 
     @Override
     public Receipt getByTransactionId(UUID transactionId) {
-        return null;
+        return repository.find("transactionId", transactionId).stream().findFirst().orElse(null);
     }
 
     @Override
