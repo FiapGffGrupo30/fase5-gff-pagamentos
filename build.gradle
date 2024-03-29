@@ -14,16 +14,14 @@ dependencies {
     implementation 'io.quarkus:quarkus-redis-client'
     implementation 'io.quarkus:quarkus-container-image-jib'
     implementation 'io.quarkus:quarkus-kubernetes'
+    implementation 'io.quarkus:quarkus-mongodb-panache'
     implementation 'io.quarkus:quarkus-smallrye-reactive-messaging-rabbitmq'
-    implementation 'io.quarkus:quarkus-flyway'
-    implementation 'io.quarkus:quarkus-security-jpa'
     implementation 'io.quarkus:quarkus-smallrye-openapi'
     implementation 'io.quarkus:quarkus-resteasy-reactive-jackson'
-    implementation 'io.quarkus:quarkus-jdbc-postgresql'
-    implementation 'io.quarkus:quarkus-hibernate-orm-panache'
     implementation 'io.quarkus:quarkus-resteasy-reactive'
     implementation 'io.quarkus:quarkus-arc'
     implementation 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'io.quarkus:quarkus-panache-common'
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
     implementation "org.mapstruct:mapstruct:1.5.5.Final"
