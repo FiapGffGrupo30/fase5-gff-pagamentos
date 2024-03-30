@@ -13,12 +13,6 @@ public class PaymentService implements PaymentUseCase {
     @Override
     public boolean process(Receipt receipt, PaymentSpecification paymentSpecification) {
         Log.info("Processing payment");
-        try {
-            Thread.sleep(5000);
-            return new Random().nextBoolean();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            return false;
-        }
+        return true;
     }
 }
